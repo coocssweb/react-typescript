@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es2015",
+        "jsx": "react",
+        "lib": [
+            "es2016",
+            "dom"
+        ],
+        "removeComments": true,
+        "moduleResolution": "Classic",
+        "declaration": false,
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "baseUrl": "./src",
+        "paths":{
+            "@components/*": ["components/*"],
+            "@scss/*": ["assets/scss/*"],
+            "@api/*": ["api/*"],
+            "@utils/*": ["utils/*"],
+            "@constants/*": ["constants/*"]
+        }
+    },
+    "compileOnSave": false,
+    "exclude": [
+        "node_modules",
+        "build",
+        "config"
+    ],
+    "include": [
+        "src"
+    ]
+}
