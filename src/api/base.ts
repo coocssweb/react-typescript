@@ -9,8 +9,8 @@ class Base {
         requireLogin: false,
         needDelay: false
     }
-    request (options: RequestOptions) {
-        options = { ...Base.defaultOptions, options };
+    protected request (options: RequestOptions) {
+        options = { ...Base.defaultOptions, ...options };
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

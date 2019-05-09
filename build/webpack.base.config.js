@@ -10,7 +10,7 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
     const IS_DEVELOPMENT = NODE_ENV === 'development';
     const webpackConfig = {
         entry: {
-            index: resolve('src', 'app.js')
+            index: resolve('src', 'app.tsx')
         },
         output: {
             path: resolve('./'),
@@ -23,7 +23,7 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
         module: {
             rules: [
                 {
-                    test: /\.ts$/,
+                    test: /\.(ts|tsx)$/,
                     loader: 'awesome-typescript-loader',
                     exclude: /(node_modules)/,
                     options: IS_DEVELOPMENT ? {
@@ -86,7 +86,7 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 template: './src/index.html',
-                chunks: ['manifest', 'vendor', 'app', 'common', item.name],
+                chunks: ['manifest', 'vendor', 'app', 'common', 'index'],
                 hash: false,
                 inject: 'body',
                 xhtml: false,

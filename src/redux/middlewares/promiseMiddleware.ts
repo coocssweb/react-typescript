@@ -1,5 +1,6 @@
+import { Action } from '@constants/interface';
 export default ({ dispatch, getState }) => {
-    return (next) => (action) => {
+    return (next: Function) => (action: Action) => {
         const { promise, types, callback, ...rest } = action;
 
         if (!promise) {
@@ -11,10 +12,10 @@ export default ({ dispatch, getState }) => {
         next({ ...rest, type: REQUEST });
 
         return promise().then(
-            (result) => {
+            (result: any) => {
                 next({ ...rest, callback, result, type: SUCCESS });
             },
-            (error) => {
+            (error: any) => {
                 next({ ...rest, callback, error, type: FAILURE });
             }
         );
