@@ -1,5 +1,5 @@
 <h1 align="center">react-typescript</h1>
-这是一个基于webpack4.0 的React工程，简化繁杂的前端开发。支持一些好的写法，比如：Typescript，ES6、curry、compose等。
+这是一个基于webpack4.0 的React工程，简化繁杂的前端开发。支持一些好的依赖，比如：Typescript、Hooks、Redux，ES6、curry、compose等。
 
 ## Install
 
@@ -25,21 +25,21 @@ npm run build
 - ✔︎ 拥有许多通用模块，让你从繁杂的网页开发中跳出来
 - ✔︎ 基于Typescript实现，让你的Javascript代码更好维护
 - ✔ 无第三方依赖，代码体积小，如果你需要其他依赖可自行引入
-- ✔ 支持响应式开发
 
 ## 目录说明
 ```bash
     ├──build/                       * webpack 工程化代码
     ├──config/                      * 配置文件目录，在这里可以自定义配置多个环境，多个入口文件
     ├──src/                         * 项目代码目录
-    ├──├──app/                      * app实现
-    ├──├──├──modules/               * 通用模块
     ├──├──assets/                   * 前端资源文件
-    ├──├──layout/                   * 基于Ejs的模板文件
-    ├──├──pages/                    * 业务代码目录
     ├──├──utis/                     * 工具类
-    ├──├──constant.ts               * 通用常量
-    ├──├──interface.ts              * typescript 通用接口文件
+    ├──├──constant/const.ts         * 通用常量
+    ├──├──constant/interface.ts     * typescript 通用接口文件
+    ├──├──containers/               * redux connect组件
+    ├──├──components/               * 通用组件
+    ├──├──hoc/                      * 高阶组件
+    ├──├──pages/                    * 业务代码
+    ├──├──root/                     * 路由
 ```
 
 ## 多开发环境配置

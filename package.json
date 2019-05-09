@@ -1,8 +1,8 @@
 {
-  "name": "html5-typescript",
+  "name": "react-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.tsx",
   "scripts": {
     "start": "webpack-dev-server --config build/webpack.dev.config.js --open --hot",
     "build:test": "webpack --config build/webpack.test.config.js --progress --hide-modules",

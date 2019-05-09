@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Layout from '../containers/layout';
+import Home from '../containers/home';
 
 export default function () {
     return (
         <Router>
-            <Route path="/" component={Layout}>
+            <Route path="/" component={Home}>
             </Route>
         </Router>
     );

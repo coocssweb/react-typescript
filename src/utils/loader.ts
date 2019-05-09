@@ -3,7 +3,7 @@
  * @author: 王佳欣
  * @email: 1974740999@qq.com
  */
-import { EMPTY_FUNCTION } from '@constants/index';
+import { EMPTY_FUNCTION } from '@constants/const';
 
 // load javascript
 export const loadScript = (src: string): Promise<any> => {

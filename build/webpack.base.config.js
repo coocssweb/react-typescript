@@ -86,7 +86,7 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 template: './src/index.html',
-                chunks: ['manifest', 'vendor', 'app', 'common', 'index'],
+                chunks: IS_DEVELOPMENT ? ['index'] : ['manifest', 'vendor', 'common', 'index'],
                 hash: false,
                 inject: 'body',
                 xhtml: false,
@@ -105,45 +105,14 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
         ],
         resolve: {
             alias: {
-                '@app': resolve('src/app/index.ts'),
-                '@layout': resolve('src/layout/index.js'),
-                '@modules': resolve('src/app/modules'),
+                '@constants': resolve('src/constants'),
+                '@api': resolve('src/api'),
+                '@components': resolve('src/components'),
                 '@utils': resolve('src/utils'),
                 '@scss': resolve('src/assets/scss')
             },
             extensions: ['.ts', '.js', '.tsx']
         },
-    };
-
-    // 公共代码
-    webpackConfig.optimization = {
-        splitChunks: {
-            chunks: 'all',
-            minSize: 0,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            automaticNameDelimiter: '-',
-            name: 'common',
-            cacheGroups: {
-                app: {
-                    test: /[\\/]src\/app[\\/]/,
-                    chunks: 'all',
-                    name: 'app',
-                    minChunks: 1,
-                    priority: 10
-                },
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    chunks: 'all',
-                    name: 'vendor',
-                    minChunks: 1,
-                    priority: 10
-                }
-            }
-        },
-        runtimeChunk: {
-            name: 'manifest',
-        }
     };
 
     // 开发环境服务器配置
@@ -168,6 +137,30 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
             new webpack.HotModuleReplacementPlugin()
         );
     } else {
+          // 公共代码
+        webpackConfig.optimization = {
+            splitChunks: {
+                chunks: 'all',
+                minSize: 0,
+                maxAsyncRequests: 5,
+                maxInitialRequests: 3,
+                automaticNameDelimiter: '-',
+                name: 'common',
+                cacheGroups: {
+                    vendor: {
+                        test: /[\\/]node_modules[\\/]/,
+                        chunks: 'all',
+                        name: 'vendor',
+                        minChunks: 1,
+                        priority: 10
+                    }
+                }
+            },
+            runtimeChunk: {
+                name: 'manifest',
+            }
+        };
+
         // 压缩css
         webpackConfig.plugins.push(
             new OptimizeCssAssetsPlugin({

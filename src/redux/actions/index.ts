@@ -1,13 +1,12 @@
+import { Action } from '@constants/interface';
+import { EMPTY_FUNCTION } from '../../constants/const';
 import * as actionTypes from '../constants/index';
-import { EMPTY_FUNCTION } from '@constants/index';
 import api from '@api/index';
 
-export const fetchRecommendIdeas = (callback = EMPTY_FUNCTION) => {
+export const pushOneUser = (user, callback = EMPTY_FUNCTION) : Action => {
     return {
-        types: [actionTypes.HOME_LIST_ERROR, actionTypes.HOME_LIST_SUCCESS, actionTypes.HOME_LIST_ERROR],
-        promise: () => {
-            return api.fetch();
-        },
+        type: actionTypes.PUSH_ONE_USER,
+        result: user,
         callback
     };
 };

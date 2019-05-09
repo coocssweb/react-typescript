@@ -1,3 +1,1 @@
-export const HOME_LIST_REQUEST = 'HOME_LIST_REQUEST';
-export const HOME_LIST_SUCCESS = 'HOME_LIST_SUCCESS';
-export const HOME_LIST_ERROR = 'HOME_LIST_ERROR';
+export const PUSH_ONE_USER = 'PUSH_ONE_USER';

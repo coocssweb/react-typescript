@@ -1,44 +1,25 @@
 import '@scss/pages/home.scss';
 import  * as React from 'react';
 import className from 'classnames';
+import { Route, Switch, Link } from 'react-router-dom';
+import StateHook from './hooks/stateHook';
+import EffectHook from './hooks/effectHook';
 
-interface Props {
-    list: Array<any>
-};
-
-interface State {
-
-};
-
-const Index = (props: Props) => {
-    const [number, setNumber] = React.useState(0)
+const Index = (props: {}) => {
     return (
-        <div className={className('home')}>
-            <h1 className={'homeTitle'}>首页</h1>
-            <div className={className('homeSection')}>
-                <div className={className('homeSection-title')}>Hooks 演示</div>
-                <div className={className('homeSection-content')}>
-                    <button onClick={ () => setNumber(number + 1) }>
-                        increase
-                    </button>
-                        {number}
-                    <button onClick={ () => setNumber(number - 1) }>
-                        decrease
-                    </button>
-                </div>
+        <React.Fragment>
+            <div className={className('page')}>
+                <h1 className={'page-title'}>功能列表</h1>
+                <ul className="examples">
+                    <li>1. <Link to="/state_hook">state hook 演示</Link></li>
+                    <li>2. <Link to="/effect_hook">effect hook 演示</Link></li>
+                </ul>
             </div>
-
-            <div className={className('homeSection')}>
-                <div className={className('homeSection-title')}>Redux数据 演示</div>
-                <div className={className('homeSection-content')}>
-                {
-                    props.list.map(
-                        item => <div key={item.id}>{item.name}</div>
-                    )
-                }
-                </div>
-            </div>
-        </div>
+            <Switch>
+                <Route path="/state_hook" component={StateHook} exact />
+                <Route path="/effect_hook" component={EffectHook} exact />
+            </Switch>
+        </React.Fragment>
     );
 };
 

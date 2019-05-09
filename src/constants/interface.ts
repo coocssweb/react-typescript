@@ -8,8 +8,8 @@ export interface RequestOptions {
 };
 
 export interface Action {
-    type: string,
-    types: Array<string>,
+    type?: string,
+    types?: Array<string>,
     promise?: any,
     result?: any,
     error?: any,

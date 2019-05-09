@@ -2,15 +2,15 @@ import * as actionTypes from '../constants/index';
 import { Action } from '@constants/interface';
 const initialState = {
    list: [
-       { name: 'test', id: 1 }
+       { name: 'first', id: 1 }
    ]
 };
 
 export default (state = initialState, action: Action) => {
     const { result } = action;
     switch (action.type) {
-        case actionTypes.HOME_LIST_SUCCESS:
-            return Object.assign({}, state);
+        case actionTypes.PUSH_ONE_USER:
+            return Object.assign({}, state, { list: [...state.list, action.result] });
         default:
             return state;
     }
