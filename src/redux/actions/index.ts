@@ -1,5 +1,5 @@
 import { Action } from '@constants/interface';
-import { EMPTY_FUNCTION } from '../../constants/const';
+import { EMPTY_FUNCTION } from '@constants/const';
 import * as actionTypes from '../constants/index';
 import api from '@api/index';
 

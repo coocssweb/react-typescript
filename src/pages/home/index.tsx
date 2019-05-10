@@ -9,7 +9,7 @@ const Index = (props: {}) => {
     return (
         <React.Fragment>
             <div className={className('page')}>
-                <h1 className={'page-title'}>功能列表</h1>
+                <h1 className={'page-title'}>演示：</h1>
                 <ul className="examples">
                     <li>1. <Link to="/state_hook">state hook 演示</Link></li>
                     <li>2. <Link to="/effect_hook">effect hook 演示</Link></li>
