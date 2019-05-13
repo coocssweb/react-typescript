@@ -6,6 +6,8 @@ import StateHook from './hooks/stateHooks';
 import EffectHook from './hooks/effectHooks';
 import ContextHook from './hooks/contextHooks';
 import ReducerHook from './hooks/reduxHooks';
+import CallbackHook from './hooks/callbackHooks';
+import MemoHooks from './hooks/memoHooks';
 
 const Index = (props: {}) => {
     return (
@@ -17,6 +19,8 @@ const Index = (props: {}) => {
                     <li>2. <Link to="/effect_hook">effect hook 演示</Link></li>
                     <li>3. <Link to="/context_hook">context hook 演示</Link></li>
                     <li>4. <Link to="/reducer_hook">reducer hook 演示</Link></li>
+                    <li>5. <Link to="/callback_hook">callback hook 演示</Link></li>
+                    <li>6. <Link to="/memo_hook">memo hook 演示</Link></li>
                 </ul>
             </div>
             <Switch>
@@ -24,6 +28,7 @@ const Index = (props: {}) => {
                 <Route path="/effect_hook" component={EffectHook} exact />
                 <Route path="/context_hook" component={ContextHook} exact />
                 <Route path="/reducer_hook" component={ReducerHook} exact />
+                <Route path="/memo_hook" component={MemoHooks} exact />
             </Switch>
         </React.Fragment>
     );
