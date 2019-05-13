@@ -19,7 +19,9 @@
             "@scss/*": ["assets/scss/*"],
             "@api/*": ["api/*"],
             "@utils/*": ["utils/*"],
-            "@constants/*": ["constants/*"]
+            "@constants/*": ["constants/*"],
+            "@actions/*": ["redux/actions/*"],
+            "@reducers/*": ["redux/reducers/*"]
         }
     },
     "compileOnSave": false,

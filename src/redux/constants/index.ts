@@ -1,1 +1,3 @@
 export const PUSH_ONE_USER = 'PUSH_ONE_USER';
+
+export const CHANGE_HOOKS_NAME = 'CHANGE_HOOKS_NAME';

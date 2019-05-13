@@ -2,8 +2,10 @@ import '@scss/pages/home.scss';
 import  * as React from 'react';
 import className from 'classnames';
 import { Route, Switch, Link } from 'react-router-dom';
-import StateHook from './hooks/stateHook';
-import EffectHook from './hooks/effectHook';
+import StateHook from './hooks/stateHooks';
+import EffectHook from './hooks/effectHooks';
+import ContextHook from './hooks/contextHooks';
+import ReducerHook from './hooks/reduxHooks';
 
 const Index = (props: {}) => {
     return (
@@ -13,11 +15,15 @@ const Index = (props: {}) => {
                 <ul className="examples">
                     <li>1. <Link to="/state_hook">state hook 演示</Link></li>
                     <li>2. <Link to="/effect_hook">effect hook 演示</Link></li>
+                    <li>3. <Link to="/context_hook">context hook 演示</Link></li>
+                    <li>4. <Link to="/reducer_hook">reducer hook 演示</Link></li>
                 </ul>
             </div>
             <Switch>
                 <Route path="/state_hook" component={StateHook} exact />
                 <Route path="/effect_hook" component={EffectHook} exact />
+                <Route path="/context_hook" component={ContextHook} exact />
+                <Route path="/reducer_hook" component={ReducerHook} exact />
             </Switch>
         </React.Fragment>
     );
