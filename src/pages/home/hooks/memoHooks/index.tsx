@@ -7,7 +7,7 @@ interface Props {
     name: string
 };
 
-const Memo = (props: Props) => {
+const MemoHook = (props: Props) => {
     const { x, y, name } = props; 
     const sumNum = React.useMemo(() => {
         console.log('recompute');
@@ -36,7 +36,7 @@ export default () => {
             <button onClick={reSetNumbers}>父组件修改x, y</button>
             <div>
                 <div className={classNames('title')}>子组件</div>
-                <Memo name={name} x={numbers[0]} y={numbers[1]} />
+                <MemoHook name={name} x={numbers[0]} y={numbers[1]} />
             </div>
         </div>
     )

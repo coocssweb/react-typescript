@@ -1,7 +1,11 @@
 import  * as React from 'react';
 import className from 'classnames';
 
-export default (props: any) => {
+interface Props {
+    query: object
+};
+
+export default (props: Props) => {
     const [number, setNumber] = React.useState(0);
 
     return (
