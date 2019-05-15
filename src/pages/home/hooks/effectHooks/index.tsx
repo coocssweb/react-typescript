@@ -1,9 +1,27 @@
 import  * as React from 'react';
 import className from 'classnames';
 
+// custom hooks
+const useStatus = (userId: number) => {
+    const [status, setStatus] = React.useState(true);
+    React.useEffect(() => {
+        function handleStatusChange (status: boolean) {
+            setStatus(status);
+        }
+        console.log('mount');
+
+        // when userId change, run, do something like unsubscribe
+        return () => {
+            console.log('child unmount');
+        };
+    }, [userId])
+};
+
 export default (props: any) => {
     const [number, setNumber] = React.useState(0);
     const [name, setName] = React.useState('name - 0');
+
+    const isOnline = useStatus(number);
 
     React.useEffect(() => {
         // run, only when number changed
@@ -14,11 +32,11 @@ export default (props: any) => {
     React.useEffect(() => {
         // run, only when name changed
         console.log(name);
-
-        // run, only when component unmount
+        console.log('component mount');
+        // run, only when component unmount or name changed
         // you can do somethings what need to clear when this component unmout
         return () => {
-            console.log('unmout');
+            console.log('component unmout');
         };
     }, [name]);
 
