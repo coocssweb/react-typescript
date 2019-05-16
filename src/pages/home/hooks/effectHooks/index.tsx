@@ -8,41 +8,40 @@ const useStatus = (userId: number) => {
         function handleStatusChange (status: boolean) {
             setStatus(status);
         }
-        console.log('mount');
+        console.log('child effect ', userId);
 
         // when userId change, run, do something like unsubscribe
         return () => {
-            console.log('child unmount');
+            console.log('child unmount ', userId);
         };
-    }, [userId])
+    }, [userId]);
+
+    console.log('child render ', userId);
+
+    // when userid changed, it's sequence is
+    // child render userid => child unmount prevUserId => child effect userId
 };
 
 export default (props: any) => {
     const [number, setNumber] = React.useState(0);
-    const [name, setName] = React.useState('name - 0');
-
     const isOnline = useStatus(number);
 
     React.useEffect(() => {
         // run, only when number changed
         document.title = `clicked ${number} times`;
+        setTimeout(() => {
+            // count always captures the value every render
+            // so the number is always 0, even you decrease it
+            // if need captures the lastest number use useRef
+            alert(number);
+        }, 5000);
+
         // if remove number, this effect will run every render.
-    }, [number]);
-
-    React.useEffect(() => {
-        // run, only when name changed
-        console.log(name);
-        console.log('component mount');
-        // run, only when component unmount or name changed
-        // you can do somethings what need to clear when this component unmout
         return () => {
-            console.log('component unmout');
-        };
-    }, [name]);
 
-    const rename = () => {
-        setName(`name-${(Math.random() * 100).toFixed(0)}`);
-    }
+        };
+    }, []);
+
 
     return (
         <div className={className('section')}>
@@ -56,7 +55,6 @@ export default (props: any) => {
                         Increase
                     </button>
                 </div>
-                <button onClick={rename}>Rename</button>
         </div>
     );
 };

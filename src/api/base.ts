@@ -23,7 +23,7 @@ class Base {
         const requestUrl = `${process.env.API}${options.path}`;
         const startReqeustTimestamp = Date.now();
 
-        return new Promise((resolve, reject) => {
+        return new Promise<{ meta: any, response: any }>((resolve, reject) => {
             fetch(requestUrl, fetchInit).then((response) => {
                 const timediff = Date.now() - startReqeustTimestamp;
                 if (options.needDelay && timediff < 300) {

@@ -98,6 +98,7 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
                 'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
                 'process.env.STATIC_PATH': JSON.stringify(config.staticPath),
                 'process.env.HOST': JSON.stringify(config.HOST),
+                'process.env.API': JSON.stringify(config.API),
             }),
             new MiniCssExtractPlugin({
                 filename: IS_DEVELOPMENT ? 'style.css' : `${config.filePath}css/[name].[contenthash:8].css`

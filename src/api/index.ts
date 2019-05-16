@@ -1,8 +1,8 @@
 import Base from './base';
 
 class Index extends Base {
-    fetch () {
-        return this.request({ path: 'test', data: {}, needDelay: true });
+    fetch () : Promise<{ meta: any, response: any }> {
+        return this.request({ path: '/services/demos', data: {}, needDelay: true });
     }
 }
 
