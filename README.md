@@ -16,6 +16,9 @@ npm run build:test
 
 # 生产环境代码构建
 npm run build
+
+# run storybook
+npm run storybook
 ```
 
 <h2 align="center">Features</h2>

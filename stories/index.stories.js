@@ -17,4 +17,9 @@ storiesOf('Button', module)
     </Button>
   ));
   
-  storiesOf('Demo', module).add('demo', () => <Demo onClick={action('clicked')}>Demo Button</Demo>);
+  storiesOf('Demo', module).add('demo', 
+    () => <Demo onClick={action('clicked')}>Demo Button</Demo>,
+    {
+      notes: 'A very simple example of addon notes',
+    }
+  );
