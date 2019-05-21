@@ -1,109 +1,80 @@
 import  * as React from 'react';
-import className from 'classnames';
+import { useState, useCallback } from 'react';
+import useSetState from '@components/hooks/useSetState';
+import useGetState from '@components/hooks/useGetState';
 
-interface Props {
-    query: object
-};
+const useCount = () => {
+    const [count, setCount] = useState(0);
+    console.log(count);
+    const set = () => {
+        setCount(count + 1);
+    };
 
-function LatestCountExample(props: {}) {
-    const [count, setCount] = React.useState(2);
-    const latestCount = React.useRef(count);
-    latestCount.current =  count;
-  
-    function handleAlertClick() {
-        setTimeout(() => {
-            // lastestCount captures the lastest time setCount 
-            alert('You clicked on: ' + latestCount.current);
-        }, 3000);
-    }
-
-    return (
-        <div>
-            <p>You clicked {count} times</p>
-            <button onClick={() => setCount(count + 1)}>
-            Click me
-            </button>
-            <button onClick={handleAlertClick}>
-            Show alert
-            </button>
-        </div>
-    );
+    return [set];
 }
 
-function FunctionalUpdateExample (props: {}) {
-    const [count, setCount] = React.useState(0);
+export default () => {
+    const [count, setCount] = useState(0);
+    const [user, setUser] = useSetState({name: 'wjx'});
+    const [getOtherCount, setOtherCount] = useGetState(0);
+    const otherCount = getOtherCount();
+    
+    const [set] = useCount();
 
-    function handleAlertClick() {
-        setTimeout(() => {
-            // different with parent components
-            alert('You clicked on: ' + count);
-        }, 3000);
-    }
-
-    // <button onClick={() => setCount(count + 1)}></button>
-    // <button onClick={() => setCount(prevCount => prevCount + 1)}>
-    return (
-        <div>
-            <p>You clicked {count} times</p>
-            <button onClick={() => setCount(prevCount => prevCount + 1)}>
-            Click me
-            </button>
-            <button onClick={handleAlertClick}>
-            Show alert
-            </button>
-        </div>
+    // difference
+    const setInCallback = useCallback(
+      () => {
+        set();
+      },
+      [],
     );
-}
 
-function LazyInitialExample (props: {}) {
-    const [count, setCount] = React.useState(() => {
-        // only run just the first time
-        console.log('computed initail');
-        return 10;
-    });
-
-    return (
-        <div>
-            <p>You clicked {count} times</p>
-            <button onClick={() => setCount(count + 1)}>
-            Click me
-            </button>
-        </div>
-    );
-}
-
-export default (props: Props) => {
-    const [count, setCount] = React.useState(0);
-
-    function handleAlertClick() {
+    function handleShowCountClick() {
         setTimeout(() => {
             // count always captures the value every render
             // count is constant within a particular component render
             alert('You clicked on: ' + count);
         }, 3000);
     }
+
+    function handleShowOtherCountClick() {
+        setTimeout(() => {
+            alert('You clicked on: ' + getOtherCount());
+        }, 3000);
+    }
   
     return (
         <div>
             <p>You clicked {count} times</p>
             <button onClick={() => setCount(count + 1)}>
-            Click me
+                Click me
             </button>
-            <button onClick={handleAlertClick}>
-            Show alert
+            <button onClick={handleShowCountClick}>
+                Show alert
             </button>
-
+            <button onClick={() => { set(); }}>set</button>
+            <button onClick={() => { setInCallback(); }}>setInCallback</button>
             <div>
-                latest count example:
-                <LatestCountExample />
+                <div>useGetState:</div>
+                <p>You clicked {otherCount} times</p>
+                <button onClick={() => setOtherCount(otherCount + 1)}>
+                    Click me
+                </button>
+                <button onClick={handleShowOtherCountClick}>
+                    Show alert
+                </button>
             </div>
             <div>
-            functional update example:
-                <FunctionalUpdateExample />
-            </div>
-            <div>
-                lazy initail example
-                <LazyInitialExample />
+            <div>useSetState:</div>
+            { 
+                Object.keys(user).map(key => {
+                    return (<p key={key}>{key}: {user[key]}</p>)
+                })
+            }
+                <div>
+                    <button onClick={() => {setUser({age: 19})}}>age: 19</button>
+                    <button onClick={() => {setUser({sexy: 'male'})}}>sexy: male</button>
+                </div>
             </div>
         </div>
     );

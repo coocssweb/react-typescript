@@ -34,7 +34,7 @@ export default (props: any) => {
             // so the number is always 0, even you decrease it
             // if need captures the lastest number use useRef
             alert(number);
-        }, 5000);
+        }, 1000);
 
         // if remove number, this effect will run every render.
         return () => {
