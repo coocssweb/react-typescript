@@ -9,6 +9,13 @@ class Base {
         requireLogin: false,
         needDelay: false
     }
+    
+    private requestUrl: string;
+
+    constructor (model: string) {
+        this.requestUrl = `${process.env.API}${model}`;
+    }
+
     protected request (options: RequestOptions) {
         options = { ...Base.defaultOptions, ...options };
         const headers = {
@@ -20,11 +27,11 @@ class Base {
             headers,
             mode: 'cors'
         };
-        const requestUrl = `${process.env.API}${options.path}`;
+        this.requestUrl = `${this.requestUrl}${options.path}`
         const startReqeustTimestamp = Date.now();
 
         return new Promise<{ meta: any, response: any }>((resolve, reject) => {
-            fetch(requestUrl, fetchInit).then((response) => {
+            fetch(this.requestUrl, fetchInit).then((response) => {
                 const timediff = Date.now() - startReqeustTimestamp;
                 if (options.needDelay && timediff < 300) {
                     setTimeout(() => {

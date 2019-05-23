@@ -1,4 +1,3 @@
-import '@scss/pages/home.scss';
 import  * as React from 'react';
 import className from 'classnames';
 import { Route, Switch, Link } from 'react-router-dom';

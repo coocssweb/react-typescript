@@ -1,0 +1,91 @@
+@import "../base/common.scss";
+@import "../base//variables.scss";
+
+.login{
+    height: 100%;
+    background-color: rgb(0, 128, 157);
+    background-image: url(https://auth.gfx.ms/16.000.28103.6/images/AppBackgrounds/28.jpg?x=65f7aacca6193a75765a132ca8e72690);
+    background-size: cover;
+    &-mask{
+        @extend .mask;
+    }
+    &Form{
+        background-color: rgba(255, 255, 255, 1);
+        width: 430px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -215px;
+        margin-top: -250px;
+        padding: 40px;
+        box-sizing: border-box;
+        border: 1px solid #efefef;
+        &-title{
+            font-size: 30px;
+            color: $colorPrimary;
+            font-family: "Segoe UI","Helvetica Neue","Lucida Grande","Roboto","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+        }
+        &-subtitle{
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #404040;
+            font-family: "Segoe UI","Helvetica Neue","Lucida Grande","Roboto","Ebrima","Nirmala UI","Gadugi","Segoe Xbox Symbol","Segoe UI Symbol","Khmer UI","Tunga","Lao UI","Raavi","Iskoola Pota","Latha","Leelawadee","Microsoft YaHei UI","Microsoft JhengHei UI","Malgun Gothic","Estrangelo Edessa","Microsoft Himalaya","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Tai Le","Microsoft Yi Baiti","Mongolian Baiti","MV Boli","Myanmar Text","Cambria Math";
+        }
+        &-line{
+            margin-top: 15px;
+            &--right{
+                text-align: right;
+                margin-top: 30px;
+            }
+            &--hide{
+                display: none;
+            }
+        }
+        &-input{
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: transparent;
+            border-bottom: 1px solid rgba(0,0,0,.3);
+            outline: none;
+            padding: 10px 0px;
+            font-size: 16px;
+            &:focus {
+                border-bottom: 1px solid #0067b8;
+            }
+        }
+    }
+
+    &Info{
+        position: relative;
+        margin-top: 30px;
+        background-color: #f5f5f5;
+        padding: 10px 10px 10px 70px;
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover{
+            background-color: #f0f0f0;
+        }
+        &-avatar{
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+        &-name{
+            color: #999999;
+            height: 20px;
+            line-height: 20px;
+        }
+        &-nickname{
+            color: #404040;
+            font-size: 20px;
+            height: 30px;
+            line-height: 30px;
+        }
+    }
+}

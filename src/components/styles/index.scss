@@ -1,0 +1,30 @@
+@import "variables";
+@import "animation";
+@import "transition";
+@import "select";
+@import "modal";
+@import "button";
+@import "switch";
+@import "collapse";
+@import "tabs";
+@import "drawer";
+@import "icon";
+@import "loading";
+@import "toast";
+@import "coolpanel";
+@import "lazyimg";
+@import "placebo";
+@import "dropdown";
+@import "input";
+@import "form";
+@import "uploader";
+@import "noneData";
+@import "alert";
+
+.cooClearfix{
+    &:after{
+        content: '';
+        clear: both;
+        display: table;
+    }
+}
