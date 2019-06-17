@@ -12,12 +12,8 @@ const CallbackHook = (props: Props) => {
 
     const memoizedCallback = React.useCallback(() => {
         // only recompute when age is changed.
-        console.log(name);
-        () => {
-            // run only name is change
-            console.log(name);
-        }
-    }, [age])
+        console.log('recompute callback', name);
+    }, [age]);
 
     return <button onClick={memoizedCallback}>点击子组件</button>;
 };

@@ -27,22 +27,23 @@ export default (props: any) => {
     const isOnline = useStatus(number);
 
     React.useEffect(() => {
+        console.log('1');
         // run, only when number changed
         document.title = `clicked ${number} times`;
-        setTimeout(() => {
-            // count always captures the value every render
-            // so the number is always 0, even you decrease it
-            // if need captures the lastest number use useRef
-            alert(number);
-        }, 1000);
+        // setTimeout(() => {
+        //     // count always captures the value every render
+        //     // so the number is always 0, even you decrease it
+        //     // if need captures the lastest number use useRef
+        //     alert(number);
+        // }, 5000);
 
         // if remove number, this effect will run every render.
         return () => {
 
         };
-    }, []);
+    }, [number]);
 
-
+    console.log('123');
     return (
         <div className={className('section')}>
             <div className={className('section-title')}>useState 演示</div>

@@ -21,7 +21,6 @@ class Drawer extends Component {
     }
 
     render () {
-        const state = this.state;
         const props = this.props;
         this.haveOpened = this.haveOpened || props.visible;
 
