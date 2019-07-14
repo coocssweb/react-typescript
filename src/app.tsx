@@ -1,15 +1,35 @@
 import '@scss/index.scss';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { Provider } from 'react-redux';
-import * as Immutable from 'immutable';
-import createStore from './redux/store/createStore';
+import { BrowserRouter as Router} from 'react-router-dom';
 import Root from './root/route';
-const store = createStore(Immutable.fromJS({}));
+import { GlobalContext, globalState, dispath } from './reducer';
+import useDetail from './pages/setting/modify/detail/useDetail';
+
+const GlobalProvider = ({children}) => {
+    const [detail, detailDispatch] = useDetail();
+    
+    const store = {
+        currentState: {
+            detail
+        },
+        detailDispatch,
+        dispath
+    };
+
+    return (
+        <GlobalContext.Provider value={store}>
+            { children }
+        </GlobalContext.Provider>
+    );
+};
+
 
 ReactDOM.render(
-    <Provider store={ store } >
-        <Root />
-    </Provider>,
+    <GlobalProvider>
+        <Router>
+            <Root />
+        </Router>
+    </GlobalProvider>,
     document.getElementById('app')
 );

@@ -11,12 +11,7 @@ export interface RequestOptions {
 // redux action接口
 export interface Action {
     type?: string,
-    types?: Array<string>,
-    promise?: any,
-    result?: any,
-    error?: any,
-    callback?: Function,
-    [propName: string]: any
+    payload?: Object,
 };
 
 // 登录信息

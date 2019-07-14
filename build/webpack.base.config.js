@@ -66,7 +66,7 @@ module.exports = function webpackBaseConfig (NODE_ENV = 'development') {
                     }
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.s?css$/,
                     include: resolve('src'),
                     use: [
                         {
