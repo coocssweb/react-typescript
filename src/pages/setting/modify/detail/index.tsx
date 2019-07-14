@@ -13,8 +13,6 @@ const Detail = ({history}) => {
         })
     }, []);
 
-    console.log(context.currentState);
-
     return (
         <div className="page page-appear page-detail transition-item">
             <button onClick={() => {history.replace('/modify', {leave: true})}}>back</button>
