@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Action } from '../constants/interface';
 
-export const globalState = {};
+const globalState = {};
 export const GlobalContext = React.createContext(globalState);
 export const dispath = (dispatchs: Array<Function>) => (action: Action) => {
     console.log(action);
