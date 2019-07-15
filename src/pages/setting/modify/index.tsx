@@ -1,15 +1,16 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 
-const Modify = ({history}) => {
-    const { state = { leave: false } } = history.location;
+const Modify = (props) => {
     const [appear, setAppear] = useState(true);
+    const { history } = props;
+    const { state = { leave: false } } = history.location;
     const handleToDetailClick = () => {
         setAppear(false);
         history.push('/modify/detail');
     };
     const handleGoBackClick = () => {
-        history.replace('/');
+        history.push(props.backTo);
     }
 
     return (
@@ -24,3 +25,5 @@ const Modify = ({history}) => {
 }
 
 export default Modify;
+
+// page page-leave page-setting transition-item fade-exit fade-exit-active

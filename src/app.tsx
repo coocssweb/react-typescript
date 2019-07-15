@@ -13,6 +13,7 @@ const GlobalProvider = ({children}) => {
         currentState: {
             detail
         },
+        detailDispatch,
         dispath: dispath([detailDispatch])
     };
 

@@ -45,7 +45,7 @@ a{
     z-index: 1;
 }
 
-.transition-wrapper .transition-item {
+.transition-item {
     position: fixed;
     top: 0;
     right: 0;
@@ -57,7 +57,7 @@ a{
     box-sizing: border-box;
     padding: 20px;
     height: 100vh;
-    transition: transform 0.5s, opacity 0.5s;
+    transition: transform 1s, opacity 1s;
     background-color: #ffffff;
     &-setting{
         background-color: #646464;
@@ -72,39 +72,39 @@ a{
         background-color: #f0f9f0;
     }
     &-appear{
-        &.transition-appear {
-            opacity: 0;
+        &.fade-enter {
+            opacity: .8;
             transform: translate3d(100%, 0, 0);
-            &.transition-appear-active {
+            &.fade-enter-active {
                 opacity: 1;
                 transform: translate3d(0, 0, 0);
             }
         }
 
-        &.transition-leave { 
+        &.fade-exit { 
             opacity: 1;
             transform: translate3d(0, 0, 0);
-            &.transition-leave-active {
+            &.fade-exit-active {
                 opacity: 0;
                 transform: translate3d(100%, 0, 0);
             }
         }
     }
     &-leave{
-        &.transition-appear{
-            opacity: 0;
+        &.fade-enter{
+            opacity: .8;
             transform: translate3d(-100%, 0, 0);
-            &.transition-appear-active {
+            &.fade-enter-active {
                 opacity: 1;
                 transform: translate3d(0, 0, 0);
             }
         }
 
-        &.transition-leave {
+        &.fade-exit {
             opacity: 1;
             transform: translate3d(0, 0, 0);
-            &.transition-leave-active {
-                opacity: 0;
+            &.fade-exit-active {
+                opacity: .8;
                 transform: translate3d(-100%, 0, 0);
             }
         }
