@@ -1,9 +1,31 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+const request = () => {
+    return new Promise ((resolve, reject) => {
+        setTimeout(() => {
+            resolve(1000);
+        }, 1000);
+    });
+}
+
+const fetch = async () => {
+    return request();
+}
+
+
 const Setting = ({history}) => {
+
+    const fetchData = async () => {
+        fetch().then((result) => {
+            console.log(result);
+        });
+    }
+
+    fetchData();
+
     return (
-        <div className="page page-leave page-setting transition-item" >
+        <>
             <ul>
                 <li><Link to='/profile'>to profile page</Link></li>
                 <li><Link to='/modify'>to modify page</Link></li>
@@ -11,7 +33,7 @@ const Setting = ({history}) => {
             <div>
                 Setting Page
             </div>
-        </div>
+        </>
     );
 }
 
