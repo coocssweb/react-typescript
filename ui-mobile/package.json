@@ -1,0 +1,65 @@
+{
+  "name": "@leedarson/ui-mobile",
+  "version": "0.0.1",
+  "description": "Mobile UI Component",
+  "keywords": [],
+  "author": "linbin <linbin@leedarson.com>",
+  "license": "MIT",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@192.168.5.29:iot-platform-frontend/iot-engine.git"
+  },
+  "scripts": {
+    "lint": "concurrently \"yarn run lint:js\" \"yarn run lint:less\"",
+    "lint:js": "eslint . --ext .js,.jsx",
+    "lint:less": "stylelint **/*.less --syntax less",
+    "lint:staged": "lint-staged",
+    "test": "echo ~~~~~~ component package todo unit test",
+    "build": "bash ./scripts/build.sh",
+    "build:js": "bash ./scripts/build-js.sh",
+    "build:css": "bash ./scripts/build-css.sh",
+    "watch": "yarn run build --watch",
+    "storybook:start": "start-storybook --port 8090",
+    "storybook:build": "build-storybook --config-dir .storybook --output-dir .out"
+  },
+  "dependencies": {
+    "@leedarson/helper": "0.1.0-alpha.16",
+    "@leedarson/theme": "0.0.1",
+    "prop-types": "15.7.2",
+    "rc-gesture": "0.0.22",
+    "rc-slider": "8.6.13",
+    "rc-tooltip": "3.7.3",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-sortable-hoc": "1.9.1",
+    "react-use-gesture": "5.2.4",
+    "rmc-dialog": "1.1.1",
+    "rmc-notification": "1.0.0",
+    "rmc-tabs": "1.2.29",
+    "styled-components": "5.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.5",
+    "@storybook/addon-links": "5.1.8",
+    "@storybook/addon-notes": "5.1.8",
+    "@storybook/addon-viewport": "5.1.8",
+    "@storybook/addons": "5.1.8",
+    "@storybook/react": "5.1.8",
+    "babel-loader": "8.0.6",
+    "css-loader": "3.0.0",
+    "less": "3.9.0",
+    "less-loader": "5.0.0",
+    "storybook-addon-jsx": "7.1.2",
+    "style-loader": "0.23.1"
+  },
+  "gitHead": "9c65983de633758acdf416261b4b86fd3e657144"
+}
