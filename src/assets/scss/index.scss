@@ -40,73 +40,134 @@ a{
 }
 
 
-.transition-wrapper {
-    position: relative;
-    z-index: 1;
-}
-
-.transition-item {
+.page{
     position: fixed;
     top: 0;
+    bottom: 0;
     right: 0;
     left: 0;
-}
-
-.page{
-    overflow: auto;
+    background-color: #f0f4f8;
+    height: 100%;
     box-sizing: border-box;
-    padding: 20px;
-    height: 100vh;
-    transition: transform 10s, opacity 10s;
-    background-color: #ffffff;
-    &-setting{
-        background-color: #646464;
-    }
-    &-profile{
-        background-color: #ff0000;
-    }
-    &-modify{
-        background-color: #ffff00;
-    }
-    &-detail{
-        background-color: #f0f9f0;
-    }
-    &-appear{
-        &.fade-enter {
-            opacity: .8;
-            transform: translate3d(100%, 0, 0);
-            &.fade-enter-active {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        &.fade-exit { 
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-            &.fade-exit-active {
-                opacity: 0;
-                transform: translate3d(100%, 0, 0);
-            }
-        }
-    }
-    &-leave{
-        &.fade-enter{
-            opacity: .8;
-            transform: translate3d(-100%, 0, 0);
-            &.fade-enter-active {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-
-        &.fade-exit {
-            opacity: 1;
-            transform: translate3d(0, 0, 0);
-            &.fade-exit-active {
-                opacity: .8;
-                transform: translate3d(-100%, 0, 0);
-            }
-        }
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-x: hidden;
+    z-index: 1;
+    > * {
+      flex-grow: 0;
+      flex-shrink: 0;
     }
 }
+
+
+.appear {
+    &.slide{
+        .enter {
+            z-index: 2;
+            transform: translate3d(100%, 0, 0);
+            &.enter-active {
+              transform: translate3d(0, 0, 0);
+              transition: transform .3s;
+            }
+          }
+          .exit {
+            transform: translate3d(0, 0, 0);
+            &.exit-active {
+              transform: translate3d(-30%, 0, 0);
+              transition: transform .3s;
+            }
+          }
+    }
+
+    &.fade {
+        .enter {
+            z-index: 2;
+            opacity: 1;
+            &.enter-active {
+                opacity: 1;
+                transition: opacity 0;
+            }
+        }
+        .exit {
+            opacity: 0;
+            &.exit-active {
+                opacity: 0;
+                transition: opacity 0s;
+            }
+        }
+    }
+  }
+  
+  .leave {
+      &.slide {
+        .enter {
+            transform: translate3d(-30%, 0, 0);
+            &.enter-active {
+              transform: translate3d(0, 0, 0);
+              transition: transform .3s;
+            }
+          }
+          .exit {
+            transform: translate3d(0, 0, 0);
+            &.exit-active {
+              transform: translate3d(100%, 0, 0);
+              transition: transform .3s;
+            }
+          }
+      }
+    
+      &.fade{
+        .enter {
+            opacity: 1;
+            &.enter-active {
+              opacity: 1;
+              transition: opacity 0s;
+            }
+          }
+          .exit {
+            opacity: 0;
+            &.exit-active {
+              opacity: 0;
+              transition: opacity 0s;
+            }
+          }
+      }
+   
+  }
+  
+  .subPage-transition {
+    .goodInOut-enter {
+      transform: translate(0, 20%);
+      opacity: 0;
+      &.goodInOut-enter-active {
+        transform: translate(0, 0);
+        opacity: 1;
+        transition: transform .3s, opacity .3s;
+      }
+    }
+    .goodInOut-exit {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+      &.goodInOut-exit-active {
+        transform: translate(0, 20%);
+        opacity: 0;
+        transition: transform .3s, opacity .3s;
+      }
+    }
+  }
+  
+  .fadeIn-enter {
+    opacity: 0;
+  }
+  .fadeIn-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms;
+  }
+  .fadeIn-exit {
+    opacity: 1;
+  }
+  .fadeIn-exit-active {
+    opacity: 0;
+    transition: opacity 1000ms;
+  }
