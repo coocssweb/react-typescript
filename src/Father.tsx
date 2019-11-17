@@ -32,7 +32,7 @@ const father = ({history}) =>  {
             </ul>
 
             <ul style={{ listStyleType: "none", padding: 0 }}>
-                <Link to="/father/son">go son</Link>
+                <Link to="/father/son?transition_key=favarite">go son</Link>
                 </ul>
 
             <Route

@@ -5,6 +5,9 @@ import {
   withRouter,
     Link
 } from "react-router-dom";
+
+import Slider from './slider/Slider';
+
 import Father from './Father';
 
 
@@ -17,15 +20,24 @@ const grandFather = memo(() =>  {
         setCount((value) => value + 1);
     }
 
+    const handleSliderChange = (value) => {
+        console.log(value)
+    }
+
     return (
         <BrowserRouter>
             <h1>GrandFather</h1>
             <div>count:   {count}</div>
             <button  onClick={handleCountClick}>点击+1</button>
             <ul style={{ listStyleType: "none", padding: 0 }}>
-                <Link to="/father">go father</Link>
+                <Link to="/father?transition_key=favarite">go father</Link>
             </ul>
 
+
+            <Slider  />
+
+
+            <div style={{ height: '1000px' }}></div>
             <Route
                 key="father"
                 path="/father"
@@ -33,8 +45,6 @@ const grandFather = memo(() =>  {
               />
         </BrowserRouter>
     );
-}, (prevProps, nextProps) => {
-    return true;
 });
 
 
