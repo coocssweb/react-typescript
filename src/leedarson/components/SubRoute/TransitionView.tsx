@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-const { Suspense, useState, useEffect, useRef } = React;
+const { Suspense, useState, useEffect, useRef, useMemo } = React;
+import {getPaths, push} from './paths';
 
 const parseQuery  = (url) => {
     const query = {};
@@ -18,34 +19,46 @@ const parseQuery  = (url) => {
     return query;
 }
 
-let _lastPathName;
+const useKey = (pathname, exited) => {
+    const pathnameRef = useRef(pathname);
+    const entered = getPaths().includes(pathname);
+
+    if (exited) {
+        pathnameRef.current = `${pathname}-exited`
+    } else if (entered) {
+        pathnameRef.current = `${pathname}-entered`
+    } 
+   
+    return pathnameRef.current;
+}
 
 const TransitionView = ({ history, path, location, children }) => {
-  let timeout = 300; // 动画时间
-
-
-  const queries = parseQuery(location.search);
-
-  const [transitionKey, setTransitionKey] = useState('');
-  const transitionKeyRef = useRef(location.key);
-  transitionKeyRef.current = location.key;
+  const [entered, setEntered] = useState(false);
   
+  const key = useKey(path, false);
 
   const transitionEntered = () => {
-        _lastPathName = location.pathname;
-      if (queries.transition_key) {
-        setTransitionKey(transitionKeyRef.current)
-      }
+    setEntered(true);
   }
 
+//   useEffect(() => {
+//     push(path);
+//     return () => {
+//         console.log('sssssss');
+//     }
+//   }, []);
 
-  let finalKey = transitionKey || location.key;
+//   let finalKey = transitionKey || location.key;
+//   if (path === window.lastPath && history.action === 'POP') {
+//     finalKey = `${finalKey}-POP`; 
+//   }
 
+console.log(key);
 
   // 3. 渲染
   return (
     <TransitionGroup className="subPage-transition">
-      <CSSTransition key={finalKey} classNames="goodInOut" timeout={timeout} onEntered={transitionEntered}>
+      <CSSTransition key={key} classNames="goodInOut" timeout={300} onEntered={transitionEntered}>
           {children}
       </CSSTransition>
     </TransitionGroup>

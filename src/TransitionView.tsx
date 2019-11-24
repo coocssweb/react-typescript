@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-const { Suspense, useState, useEffect } = React;
+const { Suspense, useRef, useEffect } = React;
 
 const parseQuery  = (url) => {
     const query = {};
@@ -41,14 +41,14 @@ const TransitionView = ({ history, location, children }) => {
   let effect = 'slide'; // 滑动
   let timeout = 300; // 动画时间
 
-  const [prevEffect, setPrevEffect] = useState('');
+  const prevEffectRef = useRef('');
 
-  if (propsEffect === 'fade' && prevEffect !== 'slide') {
+  if (propsEffect === 'fade' && prevEffectRef.current !== 'slide') {
     effect = 'fade';
   }
 
   const transitionEntered = () => {
-    setPrevEffect(propsEffect || 'slide')
+    prevEffectRef.current = propsEffect || 'slide';
   }
 
   const queries = parseQuery(location.search);

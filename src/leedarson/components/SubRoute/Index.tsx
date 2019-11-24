@@ -6,27 +6,63 @@
 
 import * as React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import TransitionView from './TransitionView';
-const { useEffect } = React;
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+const { useEffect, useRef, useState } = React;
 
-const SubRoute = ({ location, path, render }) => {
+window._paths = [];
 
+const ChildrenComponent = ({render, props}) => {
+    return (
+        <div className="page subRoute-page">
+            {render(props)}
+        </div>
+    );
+};
 
-    console.log(path, path === location.pathname);
+const useKey = (path, action) => {
+    const pathnameRef = useRef(path);
 
-  return (
-    <TransitionView path={path}>
-        <Switch location={location}>
-            <Route path={path} render={props => {
-                return (
-                    <div className="page subRoute-page">
-                        {render(props)}
-                    </div>
-                )
-            }} />
-        </Switch>
-    </TransitionView>
-  );
+    if (action === 'mounted') {
+        pathnameRef.current = `${path}-mounted`
+    } else if (action === 'destory') {
+        pathnameRef.current = `${path}-destory`
+    } 
+   
+    return pathnameRef.current;
+}
+
+const SubRoute = ({ location, path, render, history }) => {
+    const actionRef = useRef('');
+    const mountedRef = useRef(false)
+
+    if (window._paths.includes(path)) {
+        actionRef.current = 'mounted';
+    }
+
+    if (!mountedRef.current && !window._paths.includes(path) ) {
+        console.log('sssssssssssssss');
+        window._paths.push(path);
+        mountedRef.current = true;
+    }
+
+    console.log(window._paths);
+    if (actionRef.current === 'mounted' && !window._paths.includes(path)) {
+        actionRef.current = 'destory';
+        mountedRef.current = false;
+    }
+
+    console.log(history)
+    const key = useKey(path, actionRef.current);
+    console.log(key);
+    return (
+        <TransitionGroup className="subPage-transition">
+            <CSSTransition key={key} classNames="goodInOut" timeout={300}>
+                <Switch location={location}>
+                    <Route path={path} render={props => <ChildrenComponent render={render} props={props} />} />
+                </Switch>
+            </CSSTransition>
+        </TransitionGroup>
+    );
 };
 
 SubRoute.defaultProps = {
