@@ -7,11 +7,15 @@
 import * as React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-const { useEffect, useRef, useState } = React;
+const { useEffect, useRef, useState, useMemo } = React;
 
-window._paths = [];
-
-const ChildrenComponent = ({render, props}) => {
+const ChildrenComponent = ({path, render, props, onMount, onUnmount}) => {
+    useEffect(() => {
+        onMount();
+        return () => {
+           onUnmount();
+        }
+    }, []);
     return (
         <div className="page subRoute-page">
             {render(props)}
@@ -19,46 +23,49 @@ const ChildrenComponent = ({render, props}) => {
     );
 };
 
-const useKey = (path, action) => {
-    const pathnameRef = useRef(path);
+const _paths = [];
+let _isPop = false;
+window.onpopstate = function () {
+    _isPop = true;
+    // setTimeout(() => {
+    //     _isPop = false;
+    // }, 300);
+};
 
-    if (action === 'mounted') {
-        pathnameRef.current = `${path}-mounted`
-    } else if (action === 'destory') {
-        pathnameRef.current = `${path}-destory`
-    } 
-   
-    return pathnameRef.current;
-}
-
-const SubRoute = ({ location, path, render, history }) => {
-    const actionRef = useRef('');
-    const mountedRef = useRef(false)
-
-    if (window._paths.includes(path)) {
-        actionRef.current = 'mounted';
+const SubRoute = ({ location, path, render }) => {
+    const mounted = useRef(false);
+    const keyRef = useRef('before');
+    const {pathname} = location;
+    if (_isPop) {
+        if (_paths.indexOf(path) === _paths.length - 1) {
+            keyRef.current = 'before';
+            _isPop = false;
+        }
+    } else {
+        if (pathname === path && !mounted.current) {
+            keyRef.current = 'mounted';
+        }
     }
 
-    if (!mountedRef.current && !window._paths.includes(path) ) {
-        console.log('sssssssssssssss');
-        window._paths.push(path);
-        mountedRef.current = true;
+    const handleUnMount = () => {
+        mounted.current = false;
+        if (_paths.includes(path)) {
+            _paths.pop();
+        }
+    };
+
+    const handleMount = () => {
+        mounted.current = true;
+        if (!_paths.includes(path)) {
+            _paths.push(path);
+        }
     }
 
-    console.log(window._paths);
-    if (actionRef.current === 'mounted' && !window._paths.includes(path)) {
-        actionRef.current = 'destory';
-        mountedRef.current = false;
-    }
-
-    console.log(history)
-    const key = useKey(path, actionRef.current);
-    console.log(key);
     return (
-        <TransitionGroup className="subPage-transition">
-            <CSSTransition key={key} classNames="goodInOut" timeout={300}>
+        <TransitionGroup className={`${keyRef.current} subPage-transition`}>
+            <CSSTransition key={keyRef.current} classNames="goodInOut" timeout={300}>
                 <Switch location={location}>
-                    <Route path={path} render={props => <ChildrenComponent render={render} props={props} />} />
+                    <Route path={path} render={props => <ChildrenComponent path={path} render={render} props={props} onMount={handleMount} onUnmount={handleUnMount} />} />
                 </Switch>
             </CSSTransition>
         </TransitionGroup>

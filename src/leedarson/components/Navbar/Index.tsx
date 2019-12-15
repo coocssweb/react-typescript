@@ -15,9 +15,6 @@ const StyledNavbar = styled.div`
 
 const Navbar = ({ history }) => {
   const handleBackClick = () => {
-      console.log(window._paths);
-    window._paths.pop();
-    console.log(window._paths);
     history.goBack();
   };
 
